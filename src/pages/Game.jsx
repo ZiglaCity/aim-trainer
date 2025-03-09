@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Target from '../components/Target';
 import Score from '../components/Score';
 
-function Game({difficulty}) {
+function Game({ difficulty }) {
     const [score, setScore] = useState(0);
     const [targetPosition, setTargetPosition] = useState({ x: 50, y: 50 });
     const [timeLeft, setTimeLeft] = useState(difficulty === "easy" ? 30 : null);
@@ -14,48 +14,46 @@ function Game({difficulty}) {
         setTargetPosition({ x, y });
     };
 
-    function handleHit(){
-        setScore(score + 1);
+    function handleHit() {
+        setScore(prev => prev + 1);
         generateNewPosition();
 
-        if(difficulty !== "easy"){
-            setTargetsLeft(targetsLeft - 1);
+        if (difficulty !== "easy") {
+            setTargetsLeft(prev => prev - 1);
         }
-        if (targetsLeft - 1 == 0){
-            // endgame
+        if (targetsLeft - 1 === 0) {
+            console.log("Game Over - Medium/Hard Mode");
         }
     }
 
-    // in easy mode, we use the time left
     useEffect(() => {
-        if (difficulty === "easy" && timeLeft > 0){
-            const timer = setInterval(setTimeLeft(timeLeft - 1),1000);
-            return clearTimeout(timer);
+        if (difficulty === "easy" && timeLeft > 0) {
+            const timer = setInterval(() => {
+                setTimeLeft(prev => prev - 1);
+            }, 1000);
+            return () => clearInterval(timer);
         }
-        if (difficulty === "easy" && timeLeft === 0){
-            // endgame
+        if (difficulty === "easy" && timeLeft === 0) {
+            console.log("Game Over - Easy Mode");
         }
-    }
-        , [timeLeft]
-    )
+    }, [timeLeft, difficulty]);
 
-    // if not easy mode, use targets left
-    useEffect(()=> {
-        if( difficulty !== "easy"){
-            const interval = setInterval(generateNewPosition, difficulty === "medium" ? 1000 : 500);
-            return clearInterval(interval);
-        }
+    useEffect(() => {
+        if (difficulty !== "easy") {
+            const interval = setInterval(() => {
+                generateNewPosition();
+            }, difficulty === "medium" ? 2000 : 1000);
 
+            return () => clearInterval(interval);
         }
-        ,[targetPosition]
-    )
+    }, [difficulty ]);
+
     return (
         <div className="game-container">
             <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} />
             <Target position={targetPosition} onHit={handleHit} />
         </div>
     );
-
 }
 
 export default Game;
