@@ -28,15 +28,14 @@ function Game({ difficulty }) {
 
     useEffect(() => {
         if (difficulty === "easy" && timeLeft > 0) {
-            const timer = setInterval(() => {
-                setTimeLeft(prev => prev - 1);
+            const timeout = setTimeout(() => {
+                setTimeLeft(timeLeft - 1);
             }, 1000);
-            return () => clearInterval(timer);
-        }
-        if (difficulty === "easy" && timeLeft === 0) {
-            console.log("Game Over - Easy Mode");
+    
+            return () => clearTimeout(timeout); 
         }
     }, [timeLeft, difficulty]);
+    
 
     useEffect(() => {
         if (difficulty !== "easy") {
