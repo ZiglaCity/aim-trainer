@@ -40,13 +40,14 @@ function Game({ difficulty }) {
 
     useEffect(() => {
         if (difficulty !== "easy") {
-            const interval = setInterval(() => {
+            const timeout = setTimeout(() => {
                 generateNewPosition();
             }, difficulty === "medium" ? 2000 : 1000);
-
-            return () => clearInterval(interval);
+    
+            return () => clearTimeout(timeout);
         }
-    }, [difficulty ]);
+    }, [targetPosition]);
+    
 
     return (
         <div className="game-container">
