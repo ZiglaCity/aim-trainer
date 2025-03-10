@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Target from '../components/Target';
 import Score from '../components/Score';
+import '../styles/game.css';
 
 function Game({ difficulty }) {
     const [score, setScore] = useState(0);
@@ -50,9 +51,15 @@ function Game({ difficulty }) {
 
     return (
         <div className="game-container">
+        <aside className="scoreboard">
             <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} />
+        </aside>
+
+        <div className="game-area">
             <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} />
         </div>
+    </div>
+
     );
 }
 

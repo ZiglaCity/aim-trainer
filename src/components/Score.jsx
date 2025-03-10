@@ -1,9 +1,9 @@
-export default function Score( { score, timeLeft, targetsLeft }){
+export default function Score({ score, timeLeft, targetsLeft }) {
     return (
-        <div>
-            <h1>Score: {score} </h1>
-            <p> Time : {timeLeft}</p>
-            <p> Target Left {targetsLeft} </p>
+        <div className="score-container">
+            <h1>Score: {score}</h1>
+            <p>⏳ Time: {timeLeft}s</p>
+            <p>🎯 Targets Left: {targetsLeft}</p>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import aim from '../assets/aim-black.jpg';
 
 
 function gameOver(){
-    // 
+    
 }
 function Target({ position, onHit, targetsLeft }) {
     return (
