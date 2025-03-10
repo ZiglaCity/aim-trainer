@@ -49,9 +49,6 @@ function Game({ difficulty }) {
 
                 return () => clearTimeout(timeout);
             }
-            else{
-                return <P>Game OVer</P>
-            }
     
         }
     }, [targetPosition]);
