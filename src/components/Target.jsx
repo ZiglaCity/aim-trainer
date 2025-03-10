@@ -1,7 +1,11 @@
 import React from "react";
 import aim from '../assets/aim-black.jpg';
 
-function Target({ position, onHit }) {
+
+function gameOver(){
+    // 
+}
+function Target({ position, onHit, targetsLeft }) {
     return (
         <img
             src={aim}
@@ -15,7 +19,7 @@ function Target({ position, onHit }) {
             height: "100px",
             cursor: "pointer",
             }}
-            onClick={onHit}
+            onClick={targetsLeft > 0 ? onHit : gameOver}
         />
     );
 }

@@ -9,8 +9,8 @@ function Game({ difficulty }) {
     const [targetsLeft, setTargetsLeft] = useState(difficulty === "easy" ? null : 20);
 
     const generateNewPosition = () => {
-        if (difficulty !== "easy"){
-            setTargetsLeft(prev=>prev - 1);
+        if (difficulty !== "easy" && targetsLeft > 0) {
+            setTargetsLeft(prev => prev - 1);
         }
         const x = Math.random() * (window.innerWidth - 50);
         const y = Math.random() * (window.innerHeight - 50);
@@ -21,12 +21,7 @@ function Game({ difficulty }) {
         setScore(prev => prev + 1);
         generateNewPosition();
 
-        if (difficulty !== "easy") {
-            setTargetsLeft(prev => prev - 1);
-        }
-        if (targetsLeft - 1 === 0) {
-            console.log("Game Over - Medium/Hard Mode");
-        }
+        // handle the gameOver logic later
     }
 
     useEffect(() => {
@@ -49,7 +44,6 @@ function Game({ difficulty }) {
 
                 return () => clearTimeout(timeout);
             }
-    
         }
     }, [targetPosition]);
     
@@ -57,7 +51,7 @@ function Game({ difficulty }) {
     return (
         <div className="game-container">
             <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} />
-            <Target position={targetPosition} onHit={handleHit} />
+            <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} />
         </div>
     );
 }
