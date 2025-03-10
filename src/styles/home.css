@@ -25,3 +25,36 @@ button:hover {
     background: #ff1a1a;
     transform: scale(1.1);
 }
+
+.settings-container {
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.settings-label {
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 10px;
+}
+
+.settings-select {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #16213e;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.settings-select:hover {
+    background: #1a1a2e;
+}
