@@ -9,6 +9,9 @@ function Game({ difficulty }) {
     const [targetsLeft, setTargetsLeft] = useState(difficulty === "easy" ? null : 20);
 
     const generateNewPosition = () => {
+        if (difficulty !== "easy"){
+            setTargetsLeft(prev=>prev - 1);
+        }
         const x = Math.random() * (window.innerWidth - 50);
         const y = Math.random() * (window.innerHeight - 50);
         setTargetPosition({ x, y });
@@ -39,11 +42,17 @@ function Game({ difficulty }) {
 
     useEffect(() => {
         if (difficulty !== "easy") {
-            const timeout = setTimeout(() => {
-                generateNewPosition();
-            }, difficulty === "medium" ? 2000 : 1000);
+            if (targetsLeft > 0){
+                const timeout = setTimeout(() => {
+                    generateNewPosition();
+                }, difficulty === "medium" ? 2000 : 1000);
+
+                return () => clearTimeout(timeout);
+            }
+            else{
+                return <P>Game OVer</P>
+            }
     
-            return () => clearTimeout(timeout);
         }
     }, [targetPosition]);
     
