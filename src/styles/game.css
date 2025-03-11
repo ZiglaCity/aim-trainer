@@ -4,7 +4,7 @@
     align-items: center;
     height: 100vh;
     position: relative;
-    background: linear-gradient(270deg, #1e1e1e, #3a1c71, #d76d77, #ffaf7b);
+    background: linear-gradient(270deg, #1e1e1e, #3a1c71, #220353);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     overflow: hidden;
@@ -66,5 +66,3 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
-
