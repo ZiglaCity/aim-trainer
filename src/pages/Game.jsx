@@ -29,8 +29,8 @@ function Game({ difficulty, setGameStarted }) {
     function handleRestart() {
         setScore(0);
         setTimeLeft(difficulty === "easy" ? 30 : null);
-        setTargetsLeft(difficulty === "easy" ? null : 21); 
         generateNewPosition();
+        setTargetsLeft(difficulty === "easy" ? null : 20); 
     }
 
     function handleBack(){
