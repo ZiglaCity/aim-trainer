@@ -4,7 +4,7 @@ import Score from '../components/Score';
 import '../styles/game.css';
 import ParticlesBackground from '../components/ParticlesBackground';
 
-function Game({ difficulty }) {
+function Game({ difficulty, setGameStarted }) {
     const [score, setScore] = useState(0);
     const [targetPosition, setTargetPosition] = useState({ x: 50, y: 50 });
     const [timeLeft, setTimeLeft] = useState(difficulty === "easy" ? 30 : null);
@@ -31,6 +31,10 @@ function Game({ difficulty }) {
         setTimeLeft(difficulty === "easy" ? 30 : null);
         setTargetsLeft(difficulty === "easy" ? null : 21); 
         generateNewPosition();
+    }
+
+    function handleBack(){
+        setGameStarted(false);
     }
 
     useEffect(() => {
@@ -60,7 +64,7 @@ function Game({ difficulty }) {
     return (
         <div className="game-container">
             <aside className="scoreboard">
-                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart}/>
+                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart} onBack={handleBack}/>
             </aside>
 
             <div className="game-area">

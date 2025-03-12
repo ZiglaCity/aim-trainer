@@ -18,7 +18,7 @@ export default function Home(){
                 <StartScreen onStart={() => setGameStarted(true)} />
             </div> 
         ):
-            <Game difficulty={difficulty} />
+            <Game difficulty={difficulty} setGameStarted={setGameStarted} />
         }
         </div>
     );
