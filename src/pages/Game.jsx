@@ -64,7 +64,7 @@ function Game({ difficulty, setGameStarted }) {
     return (
         <div className="game-container">
             <aside className="scoreboard">
-                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart} onBack={handleBack}/>
+                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart} onBack={handleBack} difficulty={difficulty}/>
             </aside>
 
             <div className="game-area">
