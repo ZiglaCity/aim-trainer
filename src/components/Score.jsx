@@ -1,4 +1,6 @@
-export default function Score({ score, timeLeft, targetsLeft, onRestart, onBack, difficulty }) {
+import { useEffect } from "react";
+
+export default function Score({ score, timeLeft, targetsLeft, onRestart, onBack, difficulty, isGameOver }) {
 
     const accuracy = difficulty === "easy" 
     ? (score / (30 - timeLeft)).toFixed(2)
@@ -6,8 +8,9 @@ export default function Score({ score, timeLeft, targetsLeft, onRestart, onBack,
 
     return (
         <div className="score-container">
-            <h1>Level: {difficulty}</h1>
-            <h1>Score: {score}</h1>
+            {isGameOver && <h1>🎮 Game Over!</h1>}  
+            <h2>Level: {difficulty}</h2>
+            <h2>Score: {score}</h2>
             {difficulty === "easy"  ? 
             <p>⏳ Time: {timeLeft}s</p>
             :

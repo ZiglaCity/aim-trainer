@@ -9,6 +9,8 @@ function Game({ difficulty, setGameStarted }) {
     const [targetPosition, setTargetPosition] = useState({ x: 50, y: 50 });
     const [timeLeft, setTimeLeft] = useState(difficulty === "easy" ? 30 : null);
     const [targetsLeft, setTargetsLeft] = useState(difficulty === "easy" ? null : 20);
+    const [isGameOver, setIsGameOver] = useState(false);
+    
 
     const generateNewPosition = () => {
         if (difficulty !== "easy" && targetsLeft > 0) {
@@ -28,12 +30,14 @@ function Game({ difficulty, setGameStarted }) {
 
     function handleRestart() {
         setScore(0);
+        setIsGameOver(false);
         generateNewPosition();
         setTimeLeft(difficulty === "easy" ? 30 : null);
         setTargetsLeft(difficulty === "easy" ? null : 20); 
     }
 
     function handleBack(){
+        setGameStarted(false);
         setGameStarted(false);
     }
 
@@ -64,14 +68,13 @@ function Game({ difficulty, setGameStarted }) {
     return (
         <div className="game-container">
             <aside className="scoreboard">
-                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart} onBack={handleBack} difficulty={difficulty}/>
+                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart} onBack={handleBack} difficulty={difficulty} isGameOver={isGameOver} />
             </aside>
 
             <div className="game-area">
-                <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} difficulty={difficulty} timeLeft={timeLeft} />
+                <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} difficulty={difficulty} timeLeft={timeLeft} setIsGameOver={setIsGameOver} />
             </div>
             <ParticlesBackground />
-
         </div>
 
     );

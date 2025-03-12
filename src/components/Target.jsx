@@ -2,7 +2,7 @@ import React from "react";
 import aim from '../assets/aim-black.jpg';
 
 
-function Target({ position, onHit, targetsLeft, difficulty, timeLeft }) {
+function Target({ position, onHit, targetsLeft, difficulty, timeLeft, setIsGameOver }) {
     function gameOver(){
         if (difficulty !== "easy" && targetsLeft > 0){
             onHit();
@@ -11,7 +11,7 @@ function Target({ position, onHit, targetsLeft, difficulty, timeLeft }) {
             onHit();
         }
         else{
-            alert("Game Over!");
+            setIsGameOver(true);
         }
     }
     return (
