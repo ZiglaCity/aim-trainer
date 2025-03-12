@@ -26,6 +26,13 @@ function Game({ difficulty }) {
         // handle the gameOver logic later
     }
 
+    function handleRestart() {
+        setScore(0);
+        setTimeLeft(difficulty === "easy" ? 30 : null);
+        setTargetsLeft(difficulty === "easy" ? null : 21); 
+        generateNewPosition();
+    }
+
     useEffect(() => {
         if (difficulty === "easy" && timeLeft > 0) {
             const timeout = setTimeout(() => {
@@ -53,7 +60,7 @@ function Game({ difficulty }) {
     return (
         <div className="game-container">
             <aside className="scoreboard">
-                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} />
+                <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart}/>
             </aside>
 
             <div className="game-area">
