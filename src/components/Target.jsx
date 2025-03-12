@@ -2,10 +2,18 @@ import React from "react";
 import aim from '../assets/aim-black.jpg';
 
 
-function gameOver(){
-    alert("Game Over!")
-}
-function Target({ position, onHit, targetsLeft }) {
+function Target({ position, onHit, targetsLeft, difficulty, timeLeft }) {
+    function gameOver(){
+        if (difficulty !== "easy" && targetsLeft > 0){
+            onHit();
+        }
+        else if (difficulty === "easy" && timeLeft > 0){
+            onHit();
+        }
+        else{
+            alert("Game Over!");
+        }
+    }
     return (
         <img
             src={aim}
@@ -19,7 +27,7 @@ function Target({ position, onHit, targetsLeft }) {
             height: "100px",
             cursor: "pointer",
             }}
-            onClick={targetsLeft > 0 ? onHit : gameOver}
+            onClick={gameOver}
         />
     );
 }

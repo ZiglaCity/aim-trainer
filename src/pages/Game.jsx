@@ -28,8 +28,8 @@ function Game({ difficulty, setGameStarted }) {
 
     function handleRestart() {
         setScore(0);
-        setTimeLeft(difficulty === "easy" ? 30 : null);
         generateNewPosition();
+        setTimeLeft(difficulty === "easy" ? 30 : null);
         setTargetsLeft(difficulty === "easy" ? null : 20); 
     }
 
@@ -68,7 +68,7 @@ function Game({ difficulty, setGameStarted }) {
             </aside>
 
             <div className="game-area">
-                <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} />
+                <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} difficulty={difficulty} timeLeft={timeLeft} />
             </div>
             <ParticlesBackground />
 
