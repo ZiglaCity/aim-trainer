@@ -1,9 +1,9 @@
 {
+  "homepage": "https://ZiglaCity.github.io/aim-trainer/",
   "name": "aim-trainer",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ZiglaCity.github.io/aim-trainer",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

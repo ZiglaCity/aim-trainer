@@ -4,6 +4,12 @@ import Score from '../components/Score';
 import '../styles/game.css';
 import ParticlesBackground from '../components/ParticlesBackground';
 
+const backgroundColors = {
+    easy: "#220353",  
+    medium: "#160436",
+    hard: "#1e1e1e" 
+};
+  
 function Game({ difficulty, setGameStarted }) {
     const [score, setScore] = useState(0);
     const [targetPosition, setTargetPosition] = useState({ x: 50, y: 50 });
@@ -11,21 +17,20 @@ function Game({ difficulty, setGameStarted }) {
     const [targetsLeft, setTargetsLeft] = useState(difficulty === "easy" ? null : 20);
     const [isGameOver, setIsGameOver] = useState(false);
     
-
     const generateNewPosition = () => {
         if (difficulty !== "easy" && targetsLeft > 0) {
             setTargetsLeft(prev => prev - 1);
         }
-        const x = Math.random() * (window.innerWidth - 50);
-        const y = Math.random() * (window.innerHeight - 50);
+        const buffer = 100; // to prevent the target from going off screen
+
+        const x = buffer + Math.random() * (window.innerWidth - 2 * buffer);
+        const y = buffer + Math.random() * (window.innerHeight - 2 * buffer);
         setTargetPosition({ x, y });
     };
 
     function handleHit() {
         setScore(prev => prev + 1);
         generateNewPosition();
-
-        // handle the gameOver logic later
     }
 
     function handleRestart() {
@@ -66,13 +71,15 @@ function Game({ difficulty, setGameStarted }) {
     
 
     return (
-        <div className="game-container">
+        <div className="game-container"
+            style={{ backgroundColor: backgroundColors[difficulty] }}>
+
             <aside className="scoreboard">
                 <Score score={score} timeLeft={timeLeft} targetsLeft={targetsLeft} onRestart={handleRestart} onBack={handleBack} difficulty={difficulty} isGameOver={isGameOver} />
             </aside>
 
             <div className="game-area">
-                <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} difficulty={difficulty} timeLeft={timeLeft} setIsGameOver={setIsGameOver} />
+                <Target position={targetPosition} onHit={handleHit} targetsLeft={targetsLeft} difficulty={difficulty} timeLeft={timeLeft} setIsGameOver={setIsGameOver} setTargetPosition={setTargetPosition}/>
             </div>
             <ParticlesBackground />
         </div>

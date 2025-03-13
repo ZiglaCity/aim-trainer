@@ -4,7 +4,6 @@
     align-items: center;
     height: 100vh;
     position: relative;
-    background: linear-gradient(270deg, #1e1e1e, #180736, #220353);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     overflow: hidden;
